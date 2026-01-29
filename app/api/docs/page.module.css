@@ -1,0 +1,280 @@
+:root {
+  --fg-main: #fff;
+  --fg-soft: rgba(255, 255, 255, 0.82);
+  --fg-muted: rgba(255, 255, 255, 0.55);
+  --bg-main: #0b0b0e;
+  --accent: #9ef0ff;
+  --border-soft: rgba(255, 255, 255, 0.08);
+}
+
+/* ================================
+   Container
+================================ */
+.container {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  gap: 3rem;
+  padding: 4rem 3rem;
+  color: var(--fg-main);
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(158, 240, 255, 0.06),
+      transparent 40%
+    ),
+    var(--bg-main);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ================================
+   Sidebar
+================================ */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  padding: 1.6rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border-soft);
+  position: sticky;
+  top: 2rem;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.sidebarTitle {
+  font-size: 1.2rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 1.6rem;
+}
+
+.apiList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.apiItem a {
+  display: block;
+  padding: 0.6rem 1rem;
+  margin-bottom: 7px;
+  border-radius: 12px;
+  color: var(--fg-main);
+  text-decoration: none;
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+
+.apiItem a:hover {
+  background: rgba(158, 240, 255, 0.12);
+  /* transform: translateY(-2px); */
+}
+
+.active {
+  background: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* ================================
+   Content
+================================ */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.endpoint {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: right;
+  direction: ltr;
+}
+
+.description {
+  color: var(--fg-soft);
+  line-height: 1.9;
+}
+
+/* ================================
+   Features / Tips
+================================ */
+.features,
+.tips {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  backdrop-filter: blur(12px);
+}
+
+.features h3,
+.tips h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  color: var(--fg-main);
+}
+
+.features ul,
+.tips ul {
+  margin: 0;
+  padding-right: 2rem;
+  list-style: disc;
+  color: var(--fg-soft);
+  line-height: 1.6;
+}
+
+.features li,
+.tips li {
+  margin-bottom: 0.5rem;
+}
+
+/* ================================
+   Code Tabs
+================================ */
+.codeTabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tabHeaders {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.tabHeaders button {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--fg-main);
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    0.2s;
+}
+
+.tabHeaders button:hover {
+  background: rgba(158, 240, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.activeTab {
+  background: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* ================================
+   Code Blocks
+================================ */
+.codeBlock {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  direction: ltr;
+  text-align: left;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.codeBlock:hover {
+  /* transform: translateY(-2px); */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.copyBtn {
+  direction: rtl;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--bg-main);
+  background: var(--accent);
+  border-radius: 12px;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.copyBtn:hover {
+  transform: scale(1.05);
+}
+
+/* ================================
+   Animations
+================================ */
+@keyframes glow {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.codeBlock::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 80% 20%,
+    rgba(158, 240, 255, 0.08),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.codeBlock:hover::before {
+  opacity: 1;
+}
+
+/* ================================
+   Lists in Content
+================================ */
+.content ul {
+  margin: 0;
+  padding-left: 1.4rem;
+  list-style: disc;
+  color: var(--fg-soft);
+}
+
+.content li {
+  margin-bottom: 0.5rem;
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: relative;
+    top: auto;
+    margin-bottom: 2rem;
+  }
+}

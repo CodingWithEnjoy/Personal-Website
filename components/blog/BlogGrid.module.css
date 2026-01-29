@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+/* --- wrapper to animate each card --- */
+.cardWrapper {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cardWrapper.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Optional: smoother gap transition on resize */
+@media (max-width: 768px) {
+  .grid {
+    gap: 1.5rem;
+  }
+}

@@ -1,0 +1,86 @@
+.card {
+  position: relative;
+  display: block;
+  border-radius: 20px;
+  padding: 1.6rem 1.8rem 1.8rem;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid #222;
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* --- cursor-reactive glow --- */
+.glow {
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(
+    600px circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover .glow {
+  opacity: 1;
+}
+
+/* hover lift */
+.card:hover {
+  transform: translateY(-10px) scale(1.015);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border-color: #333;
+}
+
+/* --- content --- */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.topMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.category {
+  letter-spacing: 0.04em;
+}
+
+.readingTime {
+  white-space: nowrap;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  transition: transform 0.35s ease;
+}
+
+.description {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: #cfcfcf;
+}
+
+.card:hover .title {
+  transform: translateX(-2px);
+}

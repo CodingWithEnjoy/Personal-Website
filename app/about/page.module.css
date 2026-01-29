@@ -1,0 +1,272 @@
+/* ================================
+   Global color variables
+================================ */
+:root {
+  --fg-main: #ffffff;
+  --fg-soft: rgba(255, 255, 255, 0.78);
+  --fg-muted: rgba(255, 255, 255, 0.55);
+  --glass-bg: rgba(18, 18, 18, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --accent: #9ef0ff;
+}
+
+/* ================================
+   Container
+================================ */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3rem;
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(255, 255, 255, 0.04),
+      transparent 40%
+    ),
+    #0e0e0e;
+}
+
+/* ================================
+   Main Card
+================================ */
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 100%);
+  min-height: 560px;
+
+  display: grid;
+  align-items: start;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 3.5rem;
+  padding: 3.5rem;
+
+  border-radius: 32px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid var(--glass-border);
+
+  box-shadow:
+    0 60px 160px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* soft glow */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.08),
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ================================
+   Left (Image)
+================================ */
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1.15;
+  border-radius: 26px;
+  overflow: hidden;
+
+  background: #0c0c0c;
+  border: 1px solid var(--glass-border);
+
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.75);
+}
+
+.image {
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.05) brightness(0.9);
+  transition:
+    transform 1.4s ease,
+    filter 1.4s ease;
+}
+
+.imageWrapper:hover .image {
+  transform: scale(1.06);
+  filter: grayscale(0%) contrast(1.1) brightness(1);
+}
+
+/* subtle overlay */
+.imageWrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 20%,
+    rgba(255, 255, 255, 0.15),
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+/* ================================
+   Right (Text)
+================================ */
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--fg-main);
+}
+
+.title {
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.6rem;
+  color: var(--fg-main);
+}
+
+.tagline {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2.8rem;
+  color: var(--fg-muted);
+}
+
+/* ================================
+   Bio
+================================ */
+.bio {
+  font-size: 0.95rem;
+  line-height: 2.1;
+  margin-bottom: 3rem;
+  color: var(--fg-soft);
+}
+
+/* ================================
+   Sections
+================================ */
+.section {
+  margin-bottom: 2.6rem;
+}
+
+.section h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: var(--fg-muted);
+}
+
+.section p {
+  font-size: 0.9rem;
+  line-height: 2;
+  color: var(--fg-soft);
+}
+
+/* ================================
+   Tech pills
+================================ */
+.techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.techs span {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+
+  color: var(--fg-main);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.04)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    background 0.25s ease;
+
+  opacity: 0.7;
+  cursor: default;
+}
+
+.techs span:hover {
+  transform: translateY(-3px);
+  opacity: 1;
+}
+
+/* ================================
+   List
+================================ */
+.list {
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.list li {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--fg-soft);
+}
+
+/* ================================
+   Signature
+================================ */
+.signature {
+  margin-top: 1.2rem;
+  font-style: italic;
+  color: var(--fg-muted);
+}
+
+/* ================================
+   Mobile
+================================ */
+@media (max-width: 900px) {
+  .container {
+    padding: 2rem 1.5rem;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+    padding: 2.4rem;
+    gap: 3rem;
+  }
+
+  .right {
+    text-align: center;
+    align-items: center;
+  }
+
+  .bio,
+  .section p,
+  .list li {
+    text-align: center;
+  }
+
+  .imageWrapper {
+    max-width: 280px;
+  }
+}

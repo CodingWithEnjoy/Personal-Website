@@ -1,0 +1,75 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  position: relative;
+  background: #0e0e0e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Background grid */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Snow / falling dots */
+.snow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.snowDot {
+  position: absolute;
+  top: -10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0.2;
+  }
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: #fff;
+  z-index: 1;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  z-index: 1;
+}

@@ -1,0 +1,45 @@
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  direction: rtl; /* Persian-friendly */
+}
+
+.tag {
+  position: relative;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(30, 30, 30, 0.6);
+  color: #fff;
+  cursor: default;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Cursor-reactive radial glow */
+.tag::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.tag:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.tag:hover::before {
+  opacity: 1;
+}

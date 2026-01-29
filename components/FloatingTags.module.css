@@ -1,0 +1,56 @@
+.container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.tag {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.25);
+  white-space: nowrap;
+
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+  --rotation: 0deg;
+  --scale: 1;
+
+  /* combine parallax with animation */
+  transform: translate(var(--mouse-x), var(--mouse-y)) rotate(var(--rotation))
+    scale(var(--scale));
+
+  animation-name: floatTag;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes floatTag {
+  0% {
+    transform: translate(var(--mouse-x), var(--mouse-y)) translateY(0px)
+      rotate(calc(var(--rotation) + 0deg)) scale(var(--scale));
+    opacity: 0.2;
+  }
+  25% {
+    transform: translate(var(--mouse-x), var(--mouse-y)) translateY(8px)
+      rotate(calc(var(--rotation) + 5deg)) scale(var(--scale));
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(var(--mouse-x), var(--mouse-y)) translateY(0px)
+      rotate(calc(var(--rotation) - 5deg)) scale(var(--scale));
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(var(--mouse-x), var(--mouse-y)) translateY(-8px)
+      rotate(calc(var(--rotation) + 10deg)) scale(var(--scale));
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(var(--mouse-x), var(--mouse-y)) translateY(0px)
+      rotate(calc(var(--rotation) + 0deg)) scale(var(--scale));
+    opacity: 0.2;
+  }
+}

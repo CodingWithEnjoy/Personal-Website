@@ -1,0 +1,218 @@
+/* --- main container --- */
+.container {
+  width: 100%;
+  height: 100vh; /* full viewport height */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* prevent page scroll */
+  padding: 2rem;
+  background: #0e0e0e;
+}
+
+/* --- grid background --- */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- post card scrollable --- */
+.post {
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh; /* <-- make it scrollable within viewport */
+  overflow-y: auto; /* vertical scroll */
+  padding: 3rem 2rem;
+  border-radius: 24px;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid #222;
+  color: #fff;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+  direction: rtl;
+  position: relative;
+  z-index: 2;
+  scroll-behavior: smooth;
+}
+
+/* optional: hide scrollbar in Firefox and Webkit for cleaner look */
+.post::-webkit-scrollbar {
+  width: 6px;
+}
+
+.post::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.post::-webkit-scrollbar-button {
+  visibility: hidden;
+  background: transparent;
+}
+
+/* --- fade-in --- */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- header --- */
+.header {
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  animation: fadeSlide 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.header p {
+  font-size: 1.1rem;
+  opacity: 0.75;
+  margin-bottom: 1.5rem;
+  animation: fadeSlide 0.5s 0.1s ease forwards;
+  opacity: 0;
+  transform: translateY(-10px);
+  color: #a7a7a7;
+}
+
+@keyframes fadeSlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- MDX elements --- */
+.post h2 {
+  font-size: 2rem;
+  margin: 2rem 0 1rem;
+  padding-left: 1rem;
+}
+
+.post h3 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.post p {
+  line-height: 1.9;
+  font-size: 1rem;
+  margin-bottom: 1.3rem;
+  opacity: 0.85;
+}
+
+.post ul,
+.post ol {
+  padding-right: 3rem;
+  margin-bottom: 1.5rem;
+}
+.post li {
+  margin-bottom: 0.5rem;
+}
+
+.post blockquote {
+  padding-right: 1rem;
+  margin: 1.5rem 0;
+  color: #ccc;
+  font-style: italic;
+  opacity: 0.8;
+  transform: translateX(-10px);
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+}
+
+.post code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-family: "Fira Code", monospace;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.post pre {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: "Fira Code", monospace;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease;
+  direction: ltr;
+  text-align: left;
+}
+
+.post pre code {
+  background: transparent;
+}
+
+.post a {
+  color: #9db4ff;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+.post a:hover {
+  color: #ffffff;
+}
+
+.post img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 2rem 0;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.post hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 3rem 0;
+}
+
+/* --- scroll to top button --- */
+.scrollTop {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(40, 40, 40, 0.85);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+.scrollTop:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: rgba(50, 50, 50, 0.95);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+}
