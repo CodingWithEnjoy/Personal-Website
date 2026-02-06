@@ -28,3 +28,59 @@
   color: #aaa;
   margin-top: 0.5rem;
 }
+
+.categoriesContainer {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.categoriesContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  display: inline-block;
+  background: #1f1f1f;
+  color: #aaa;
+  text-decoration: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.category::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 2px;
+  background: #ff4c60;
+  border-radius: 1px;
+  transition: transform 0.3s ease;
+}
+
+.category:hover {
+  color: #fff;
+  background: #2a2a2a;
+}
+
+.category:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.active {
+  color: #fff;
+  background: #ff4c60;
+}
+
+.active::after {
+  transform: translateX(-50%) scaleX(1);
+}

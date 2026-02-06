@@ -7,7 +7,10 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   perspective: 1000px;
 }
@@ -63,7 +66,9 @@
 
 .icon {
   color: rgba(255, 255, 255, 0.6);
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .icon:hover {
@@ -88,7 +93,9 @@
   font-size: 0.75rem;
   border-radius: 6px;
   backdrop-filter: blur(6px);
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
   animation: floatTag linear infinite;
 }
 
@@ -122,4 +129,94 @@
 .tag:hover {
   transform: translateY(-2px) scale(1.05);
   background: rgba(255, 255, 255, 0.2);
+}
+
+.fullscreenOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+  cursor: zoom-out;
+}
+
+.fullscreenOverlay.closing {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.fullscreenImage {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  transform: scale(0.8);
+  animation: zoomIn 0.3s ease forwards;
+}
+
+.fullscreenOverlay.closing .fullscreenImage {
+  animation: zoomOut 0.3s ease forwards;
+}
+
+.closeButton {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.8);
+  }
 }
