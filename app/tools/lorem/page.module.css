@@ -1,0 +1,197 @@
+/* ================================
+   Design Tokens
+================================ */
+:root {
+  --fg-main: #ffffff;
+  --fg-soft: rgba(255, 255, 255, 0.82);
+  --fg-muted: rgba(255, 255, 255, 0.55);
+
+  --bg-main: #0b0b0e;
+  --border-soft: rgba(255, 255, 255, 0.08);
+
+  --accent: #9ef0ff;
+}
+
+/* ================================
+   Container
+================================ */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 3rem 8rem;
+  color: var(--fg-main);
+  background: radial-gradient(
+      circle at 80% 10%,
+      rgba(158, 240, 255, 0.06),
+      transparent 40%
+    ),
+    var(--bg-main);
+}
+
+/* ================================
+   Card
+================================ */
+.card {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  padding: 2rem;
+  border-radius: 18px;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* ================================
+   Titles & Subtitle
+================================ */
+.title {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--fg-soft);
+  margin-bottom: 1.6rem;
+}
+
+/* ================================
+   Controls
+================================ */
+.control {
+  margin-bottom: 1.2rem;
+}
+
+.control label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-bottom: 0.4rem;
+}
+
+.control input,
+.control select,
+.control textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--fg-main);
+  font-size: 0.85rem;
+  resize: vertical;
+}
+
+/* ================================
+   Input row (for color picker / text)
+================================ */
+.inputRow {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.inputRow input[type="text"] {
+  flex: 1;
+}
+
+.inputRow input[type="color"] {
+  width: 48px;
+  height: 48px;
+  border: none;
+  padding: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* ================================
+   Buttons
+================================ */
+.actionsRow {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.actionsRow button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  border: none;
+  background: rgba(158, 240, 255, 0.15);
+  color: #9ef0ff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.actionsRow button:hover:not(:disabled) {
+  background: rgba(158, 240, 255, 0.25);
+}
+
+.actionsRow button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ================================
+   Output / Preview
+================================ */
+.output,
+.preview {
+  margin-top: 1rem;
+  border-radius: 12px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.output {
+  background: rgba(255, 255, 255, 0.05);
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.preview {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ================================
+   Error
+================================ */
+.error {
+  margin-top: 1rem;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+/* ================================
+   Code block
+================================ */
+.output pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 768px) {
+  .container {
+    padding: 3rem 1.5rem;
+  }
+
+  .actionsRow {
+    flex-direction: column;
+  }
+
+  .inputRow {
+    flex-direction: column;
+  }
+
+  .inputRow input[type="color"] {
+    width: 100%;
+    height: 48px;
+  }
+}

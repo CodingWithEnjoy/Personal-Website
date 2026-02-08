@@ -1,0 +1,141 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 4rem 1.5rem;
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(158, 240, 255, 0.08),
+      transparent 40%
+    ),
+    #0b0b0e;
+  color: #fff;
+}
+
+.card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+  line-height: 2;
+}
+
+/* Modes */
+.modes {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.4rem;
+}
+
+.modes button {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: #fff;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.modes button.active {
+  background: rgba(158, 240, 255, 0.18);
+  border-color: #9ef0ff;
+  color: #9ef0ff;
+}
+
+/* Input */
+.control label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.control textarea {
+  width: 100%;
+  min-height: 110px;
+  margin-top: 0.6rem;
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  resize: vertical;
+}
+
+/* Swap */
+.swap {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.swap button {
+  background: transparent;
+  border: none;
+  color: #9ef0ff;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+/* Output */
+.outputBox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.outputBox code {
+  flex: 1;
+  font-size: 0.75rem;
+  word-break: break-all;
+}
+
+.outputBox button {
+  border: none;
+  background: rgba(158, 240, 255, 0.15);
+  color: #9ef0ff;
+  padding: 0 0.8rem;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.outputBox button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Error */
+.error {
+  margin-top: 0.8rem;
+  font-size: 0.7rem;
+  color: #ff6b6b;
+  text-align: center;
+}
+
+/* Note */
+.note {
+  margin-top: 1.4rem;
+  text-align: center;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+}

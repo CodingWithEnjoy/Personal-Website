@@ -1,0 +1,117 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 4rem 1.5rem;
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(158, 240, 255, 0.08),
+      transparent 40%
+    ),
+    #0b0b0e;
+  color: #fff;
+}
+
+.card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+  line-height: 2;
+}
+
+.control label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.control input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.6rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+}
+
+.inputRow {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.inputRow input[type="text"] {
+  flex: 1;
+}
+
+.inputRow input[type="color"] {
+  width: 48px;
+  height: 48px;
+  border: none;
+  padding: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.preview {
+  margin-top: 1rem;
+  border-radius: 14px;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.outputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.outputs > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.outputs code {
+  font-size: 0.75rem;
+  word-break: break-all;
+}
+
+.outputs button {
+  border: none;
+  background: rgba(158, 240, 255, 0.15);
+  color: #9ef0ff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+.note {
+  margin-top: 1.4rem;
+  text-align: center;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+}

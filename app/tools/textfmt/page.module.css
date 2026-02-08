@@ -1,0 +1,119 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 4rem 1.5rem;
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(158, 240, 255, 0.08),
+      transparent 40%
+    ),
+    #0b0b0e;
+  color: #fff;
+}
+
+.card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.8rem;
+  line-height: 2;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.4rem;
+}
+
+.actions button {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.65rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.actions button.active {
+  background: rgba(158, 240, 255, 0.18);
+  border-color: #9ef0ff;
+  color: #9ef0ff;
+}
+
+/* Input */
+.control label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.control textarea {
+  width: 100%;
+  min-height: 130px;
+  margin-top: 0.6rem;
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  resize: vertical;
+}
+
+/* Output */
+.outputBox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 1.4rem;
+}
+
+.outputBox code {
+  flex: 1;
+  font-size: 0.75rem;
+  word-break: break-all;
+}
+
+.outputBox button {
+  border: none;
+  background: rgba(158, 240, 255, 0.15);
+  color: #9ef0ff;
+  padding: 0 0.8rem;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.outputBox button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Note */
+.note {
+  margin-top: 1.6rem;
+  text-align: center;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+}

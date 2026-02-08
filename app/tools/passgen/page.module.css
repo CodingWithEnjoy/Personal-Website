@@ -1,0 +1,151 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 4rem 1.5rem;
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(158, 240, 255, 0.08),
+      transparent 40%
+    ),
+    #0b0b0e;
+  color: #fff;
+}
+
+.card {
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+  line-height: 2;
+}
+
+/* Output */
+.outputBox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.outputBox code {
+  flex: 1;
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+.outputBox button {
+  border: none;
+  background: rgba(158, 240, 255, 0.15);
+  color: #9ef0ff;
+  height: 36px;
+  padding: 0 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Strength */
+.strength {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.4rem 0;
+  font-size: 0.8rem;
+}
+
+.strength strong[data-level="Weak"] {
+  color: #ff6b6b;
+}
+.strength strong[data-level="Medium"] {
+  color: #feca57;
+}
+.strength strong[data-level="Strong"],
+.strength strong[data-level="Very Strong"] {
+  color: #1dd1a1;
+}
+
+/* Controls */
+.control label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.control input {
+  width: 100%;
+  margin-top: 0.6rem;
+  background: #000;
+}
+
+/* Options */
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.checkbox input {
+  display: none;
+}
+
+.checkbox span {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.checkbox input:checked + span {
+  background: #9ef0ff;
+  border-color: #9ef0ff;
+}
+
+/* Actions */
+.actions {
+  margin-top: 1.8rem;
+  text-align: center;
+}
+
+.primary {
+  padding: 0.8rem 1.8rem;
+  border-radius: 16px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+.note {
+  margin-top: 1.6rem;
+  text-align: center;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+}
