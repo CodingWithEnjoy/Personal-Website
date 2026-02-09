@@ -32,7 +32,7 @@ export default function BottomBar() {
             className={`${styles.item} ${isActive ? styles.active : ""}`}
           >
             <span className={styles.icon}>{item.icon}</span>
-            {item.label}
+            <span className={styles.label}>{item.label}</span>
           </Link>
         );
       })}
