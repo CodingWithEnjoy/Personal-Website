@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { load as cheerioLoad, type Cheerio, type Element } from "cheerio";
+import { load as cheerioLoad } from "cheerio";
+
 /* ---------------------------------- runtime -------------------------------- */
 
-// Force Node.js runtime — cheerio does NOT work in Edge runtime
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -14,18 +14,14 @@ function normalizeNumber(text: string): number | null {
 }
 
 function extractWeightGram(name: string): number | null {
-  // gram (Persian / English) — added "گرم" variant
   const gramMatch = name.match(/([\d.]+)\s*(گرمی|گرم|g)/i);
   if (gramMatch) return Number(gramMatch[1]);
 
-  // ounce (English)
   const ozMatch = name.match(/([\d.]+)\s*oz/i);
   if (ozMatch) return Number(ozMatch[1]) * 31.1035;
 
-  // ounce (Persian)
   if (/نیم\s*اونسی/.test(name)) return 0.5 * 31.1035;
 
-  // Dynamic Persian ounce (e.g., "2 اونسی") instead of hardcoded 1oz
   const ozPersianMatch = name.match(/([\d.]+)\s*اونسی/);
   if (ozPersianMatch) return Number(ozPersianMatch[1]) * 31.1035;
 
@@ -39,20 +35,19 @@ function normalizeKey(name: string): string {
     .replace(/\s+/g, "");
 }
 
-function extractImage($el: Cheerio<Element>): string | null {
-  let imageUrl: string | null = null;
-  $el.find("img").each((_, el) => {
-    const $img = $(el);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function extractImage($el: any): string | null {
+  const imgs = $el.find("img");
+  for (let i = 0; i < imgs.length; i++) {
     const src =
-      $img.attr("data-src") ||
-      $img.attr("data-lazy-src") ||
-      $img.attr("src");
+      imgs.eq(i).attr("data-src") ||
+      imgs.eq(i).attr("data-lazy-src") ||
+      imgs.eq(i).attr("src");
     if (src && !src.startsWith("data:image") && src.includes("wp-content/uploads")) {
-      imageUrl = src;
-      return false;
+      return src;
     }
-  });
-  return imageUrl;
+  }
+  return null;
 }
 
 /* ---------------------------------- fetch helper --------------------------- */
@@ -87,13 +82,12 @@ async function fetchWithRetry(url: string, retries = 2): Promise<string> {
       }
 
       return await response.text();
-    } catch (err: any) {
+    } catch (err: unknown) {
       clearTimeout(timeoutId);
 
-      const isLastAttempt = attempt === retries;
-      if (isLastAttempt) throw err;
+      if (attempt === retries) throw err;
 
-      console.warn(`Fetch attempt ${attempt + 1} failed:`, err?.message);
+      console.warn(`Fetch attempt ${attempt + 1} failed:`, (err as Error)?.message);
       await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
     }
   }
@@ -110,7 +104,7 @@ export async function GET() {
     const html = await fetchWithRetry(url);
     const $ = cheerioLoad(html);
 
-    const map = new Map<string, any>();
+    const map = new Map<string, Record<string, unknown>>();
 
     $('div[data-elementor-type="loop-item"]').each((_, el) => {
       const $el = $(el);
@@ -140,7 +134,7 @@ export async function GET() {
           image,
         });
       } else {
-        const existing = map.get(key);
+        const existing = map.get(key)!;
         map.set(key, {
           ...existing,
           image: existing.image || image,
@@ -150,7 +144,7 @@ export async function GET() {
     });
 
     const items = Array.from(map.values()).sort(
-      (a, b) => (a.weightGram ?? 0) - (b.weightGram ?? 0),
+      (a, b) => ((a.weightGram as number) ?? 0) - ((b.weightGram as number) ?? 0),
     );
 
     return NextResponse.json({
@@ -164,19 +158,20 @@ export async function GET() {
       },
       items,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("PAMP Scraper Error:", err);
 
+    const message = (err as Error)?.message ?? "unknown error";
     const isAbortError =
-      err?.name === "AbortError" ||
-      err?.message?.toLowerCase?.().includes("aborted");
+      (err as Error)?.name === "AbortError" ||
+      message.toLowerCase().includes("aborted");
 
     return NextResponse.json(
       {
         error: "Failed to scrape PAMP gold bars",
         message: isAbortError
           ? "Request to zcoinn.com timed out after 8 seconds (all retries exhausted)"
-          : err?.message ?? "unknown error",
+          : message,
       },
       { status: 500 },
     );
