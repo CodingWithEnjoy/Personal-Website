@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { load as cheerioLoad } from "cheerio";
-
+import { load as cheerioLoad, type Cheerio, type Element } from "cheerio";
 /* ---------------------------------- runtime -------------------------------- */
 
 // Force Node.js runtime — cheerio does NOT work in Edge runtime
@@ -40,16 +39,17 @@ function normalizeKey(name: string): string {
     .replace(/\s+/g, "");
 }
 
-function extractImage($el: ReturnType<typeof cheerioLoad>): string | null {
+function extractImage($el: Cheerio<Element>): string | null {
   let imageUrl: string | null = null;
   $el.find("img").each((_, el) => {
+    const $img = $(el);
     const src =
-      $el.find(el).attr("data-src") ||
-      $el.find(el).attr("data-lazy-src") ||
-      $el.find(el).attr("src");
+      $img.attr("data-src") ||
+      $img.attr("data-lazy-src") ||
+      $img.attr("src");
     if (src && !src.startsWith("data:image") && src.includes("wp-content/uploads")) {
       imageUrl = src;
-      return false; // break loop
+      return false;
     }
   });
   return imageUrl;
