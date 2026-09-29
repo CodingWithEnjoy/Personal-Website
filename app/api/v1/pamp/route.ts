@@ -44,16 +44,44 @@ function extractImage($el: cheerio.Cheerio<any>) {
 /* ---------------------------------- route --------------------------------- */
 
 export async function GET() {
-  try {
-    const url = "https://zcoinn.com/gold-bar/";
+  const url = "https://zcoinn.com/gold-bar/";
 
-    const html = await fetch(url, {
-      headers: {
-        "User-Agent": "Mozilla/5.0",
-        Accept: "text/html",
-      },
-      cache: "no-store",
-    }).then((r) => r.text());
+  try {
+    /*
+     * Prevent the external website from hanging the Netlify Function.
+     * Netlify has its own execution timeout, so we fail earlier with
+     * a useful error instead of waiting for the platform to kill us.
+     */
+    const controller = new AbortController();
+
+    const timeout = setTimeout(() => {
+      controller.abort();
+    }, 10_000);
+
+    let html: string;
+
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/140.0.0.0 Safari/537.36",
+          Accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        },
+        cache: "no-store",
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `zcoinn.com returned HTTP ${response.status} ${response.statusText}`,
+        );
+      }
+
+      html = await response.text();
+    } finally {
+      clearTimeout(timeout);
+    }
 
     const $ = cheerio.load(html);
 
@@ -96,6 +124,7 @@ export async function GET() {
       } else {
         // merge duplicate (desktop/mobile)
         const existing = map.get(key);
+
         map.set(key, {
           ...existing,
           image: existing.image || image,
@@ -120,10 +149,16 @@ export async function GET() {
       items,
     });
   } catch (err: any) {
+    const isAbortError =
+      err?.name === "AbortError" ||
+      err?.message?.toLowerCase?.().includes("aborted");
+
     return NextResponse.json(
       {
         error: "Failed to scrape PAMP gold bars",
-        message: err?.message ?? "unknown error",
+        message: isAbortError
+          ? "Request to zcoinn.com timed out after 10 seconds"
+          : err?.message ?? "unknown error",
       },
       { status: 500 },
     );
